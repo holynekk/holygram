@@ -16,6 +16,17 @@ export default class App extends Component {
         return (
             <div className=''>
                 <BrowserRouter>
+                    <nav className='main-nav'>
+                        <h2><a href='/'>HolyGram</a></h2>
+                        <div className='nav-buttons'>
+                            <div className='nav-tripple'>
+                                <Link className='link' to='/'>Feed</Link>
+                                <Link className='link' to='/search'>Search</Link>
+                                <Link className='link' to='/create-post'>Post</Link>
+                            </div>
+                            <Link className='link sign-in-link' to='/login'>Sign in!</Link>
+                        </div>
+                    </nav>
                     <Routes>
                         <Route element={<HomePage />} path='/' exact />
                         <Route element={<Login />} path='/login' />
