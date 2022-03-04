@@ -1,68 +1,92 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default class SignUp extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: "",
-            lastName: "",
-            userName: "",
+function SignUp({setUser}) {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    function createAccount() {
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                user_name: userName,
+                password: password
+            })
         };
-        this.handleFirstName = this.handleFirstName.bind(this);
-        this.handleLastName = this.handleLastName.bind(this);
-        this.handleUserName = this.handleUserName.bind(this);
+        console.log()
+        fetch("/api/create-user", requestOptions)
+            .then((res) => res.json())
+            .then((data) => {
+                setUser(data.user_name);
+                navigate('/');
+            })
+            .catch((err) => console.log(err));
     }
 
-    createAccount() {
-
+    function handleFirstName(e) {
+        setFirstName(e.target.value);
     }
 
-    handleFirstName(e) {
-        this.setState({firstName: e.target.value});
+    function handleLastName(e) {
+        setLastName(e.target.value);
     }
 
-    handleLastName(e) {
-        this.setState({lastName: e.target.value});
+    function handleUserName(e) {
+        setUserName(e.target.value);
     }
 
-    handleUserName(e) {
-        this.setState({userName: e.target.value});
+    function handlePassword(e) {
+        setPassword(e.target.value);
     }
 
-    render() {
-        return (
-            <div className='container'>
-                <form className='sign-up-form'>
-                    <div className="group">      
-                        <input type="text" onChange={this.handleFirstName} required />
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <label>First Name</label>
-                    </div>
-                    
-                    <div className="group">      
-                        <input type="text" onChange={this.handleLastName} required />
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <label>Last Name</label>
-                    </div>
+    return (
+        <div className='container'>
+            <form className='sign-up-form'>
+                <div className="group">      
+                    <input type="text" onChange={handleFirstName} required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>First Name</label>
+                </div>
+                
+                <div className="group">      
+                    <input type="text" onChange={handleLastName} required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>Last Name</label>
+                </div>
 
-                    <div className="group">      
-                        <input type="text" onChange={this.handleUserName} required />
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <label>User Name</label>
-                    </div>
-                    <button
-                        type="button"
-                        className='create-button'
-                        onClick={this.createAccount}
-                    >
-                        Create Account
-                    </button>
-                </form>
-            </div>
-            
-        );
-    }
+                <div className="group">      
+                    <input type="text" onChange={handleUserName} required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>User Name</label>
+                </div>
+                <div className="group">      
+                    <input type="text" onChange={handlePassword} required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>Password</label>
+                </div>
+                <button
+                    type="button"
+                    className='create-button'
+                    onClick={createAccount}
+                >
+                    Create Account
+                </button>
+            </form>
+        </div>
+        
+    );
 }
+
+export default SignUp;
