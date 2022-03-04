@@ -1,3 +1,4 @@
+from cgitb import lookup
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.views import APIView
@@ -31,3 +32,19 @@ class CreateUserView(APIView):
                 return Response((UserSerializer(user).data), status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Invalid Data.'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetUserView(APIView):
+    serializer_class = UserSerializer
+    lookup_url_kwarg = 'userName'
+
+    def get(self, request, format=None):
+        user_name = request.GET.get(self.lookup_url_kwarg)
+        if user_name != None:
+            user = User.objects.filter(user_name=user_name)
+            if len(user) > 0:
+                password = request.GET.get('password')
+                if password == user[0].password:
+                    return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+                return Response({'Unauthorized': 'Password is wrong.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'User Not Found': 'Invalid User Name.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'Bad Request': 'Username couldn\'t found in database'}, status=status.HTTP_400_BAD_REQUEST) 

@@ -212,4 +212,10 @@ input:focus ~ .highlight {
     border-radius: 20px;
 }
 
+.small-login {
+    position: relative;
+    top: 40px;
+    right: 10px;
+}
+
 /* Signup Form ---------------------------------------------------------- */

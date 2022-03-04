@@ -33,7 +33,7 @@ function App() {
                 </nav>
                 <Routes>
                     <Route element={<HomePage />} path='/' exact />
-                    <Route element={<Login />} path='/login' />
+                    <Route element={<Login setUser={setUser}/>} path='/login' />
                     <Route element={<SignUp setUser={setUser}/>} path='/sign-up' />
                     <Route element={<Profile />} path='/profile/:username' />
                     <Route element={<Search />} path='/search' />
