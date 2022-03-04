@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 /* font-family: 'Major Mono Display', monospace; */
+
+:root {
+    --primary: #11998e;
+    --secondary: #38ef7d;
+  }
+
 html,
 body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #bbb;
 }
 
 #main {
@@ -18,8 +25,9 @@ body {
 #app {
     width: 100%;
     height: 100%;
-    background-color: #bbb;
 }
+
+/* Navbar ---------------------------------------------------------- */
 
 .main-nav {
     display: flex;
@@ -41,7 +49,7 @@ body {
 .main-nav > h2 > a {
     font-family: 'Major Mono Display', monospace;
     text-decoration: none;
-    color: white;
+    color: var(--primary);
 }
 
 .nav-buttons {
@@ -68,6 +76,140 @@ body {
 
 .sign-in-link {
     padding: 7px;
-    border: 1px solid white;
+    border: 2px solid var(--secondary);
     border-radius: 5px;
 }
+
+/* Navbar ---------------------------------------------------------- */
+
+
+/* Signup Form ---------------------------------------------------------- */
+
+.container { 
+    font-family:'Roboto';
+    width:600px;
+    height: 400px;
+    margin: 100px auto 0; 
+    display:block; 
+    background:#FFF;
+    padding:10px 50px 50px;
+}
+
+.sign-up-form {
+    position: relative;
+    top: 75px;
+    left: 150px;
+} 
+  
+.sign-up-form > .group { 
+    position:relative; 
+    margin-bottom:45px; 
+}
+.group > input {
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.group > input:focus { 
+    outline:none;
+}
+
+.group > label {
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+}
+
+.group > input:focus ~ label, .group > input:valid ~ label 		{
+    top:-20px;
+    font-size:14px;
+    color: var(--primary);
+}
+  
+.bar {
+    position:relative;
+    display:block;
+    width:300px;
+}
+
+.bar:before, 
+.bar:after {
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background: var(--primary); 
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+}
+
+.bar:before {
+    left:50%;
+}
+
+.bar:after {
+    right:50%; 
+}
+
+.group > input:focus ~ .bar:before, .group > input:focus ~ .bar:after {
+    width:50%;
+}
+
+.highlight {
+    position:absolute;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+  
+input:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+}
+  
+@-webkit-keyframes inputHighlighter {
+    from { background:var(--primary); }
+    to 	{ width:0; background:transparent; }
+}
+
+@-moz-keyframes inputHighlighter {
+    from { background:var(--primary); }
+    to 	{ width:0; background:transparent; }
+}
+
+@keyframes inputHighlighter {
+    from { background:var(--primary); }
+    to 	{ width:0; background:transparent; }
+}
+
+.create-button {
+    font-family:'Roboto';
+    background-color: var(--secondary);
+	padding: 10px;
+	cursor: pointer;
+	outline: inherit;
+
+    position: relative;
+    left: 100px;
+    border: none;
+    border-radius: 20px;
+}
+
+/* Signup Form ---------------------------------------------------------- */
