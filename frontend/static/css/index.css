@@ -219,3 +219,60 @@ input:focus ~ .highlight {
 }
 
 /* Signup Form ---------------------------------------------------------- */
+
+/* Create Post ---------------------------------------------------------- */
+
+.create-post-container {
+    background-color: #FFF;
+    width: 900px;
+    height: 100%;
+    margin: 0 auto 0 auto;
+}
+
+.create-post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-post-form > img {
+    margin: 40px auto 10px auto;
+    background-color: #757575;
+    width: 450px;
+    height: 450px;
+}
+
+.browse-button {
+    background-color: #bbb;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto 20px auto;
+    cursor: pointer;
+}
+
+.create-post-form > textarea {
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    resize: none;
+    box-shadow: none;
+    outline: none;
+    transition: outline 0.2s ease-in-out;
+}
+
+.create-post-form > textarea:focus {
+    outline: var(--secondary) solid 1px;
+}
+
+.create-post-button {
+    margin-top: 20px;
+    font-family:'Roboto';
+    background-color: var(--secondary);
+	padding: 12px 20px 12px 20px;
+	cursor: pointer;
+	outline: inherit;
+    border: none;
+    border-radius: 20px;
+}
+
+/* Create Post ---------------------------------------------------------- */

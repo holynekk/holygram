@@ -8,9 +8,9 @@ import Search from './Search';
 import CreatePost from './CreatePost';
 
 function App() {
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState("HolyNekK");
     return (
-        <div className=''>
+        <div style={{height: '100%'}} className=''>
             <BrowserRouter>
                 <nav className='main-nav'>
                     <h2><a href='/'>HolyGram</a></h2>
@@ -37,7 +37,7 @@ function App() {
                     <Route element={<SignUp setUser={setUser}/>} path='/sign-up' />
                     <Route element={<Profile />} path='/profile/:username' />
                     <Route element={<Search />} path='/search' />
-                    <Route element={<CreatePost />} path='/create-post' />
+                    <Route element={<CreatePost user={user}/>} path='/create-post' />
                 </Routes>
             </BrowserRouter>
         </div>

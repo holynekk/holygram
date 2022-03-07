@@ -21,7 +21,6 @@ function SignUp({setUser}) {
                 password: password
             })
         };
-        console.log()
         fetch("/api/create-user", requestOptions)
             .then((res) => res.json())
             .then((data) => {
