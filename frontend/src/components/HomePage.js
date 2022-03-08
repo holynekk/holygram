@@ -29,7 +29,7 @@ function HomePage({user}) {
                         <p className='heading-text'>{post.heading}</p>
                         {
                             post.post_image ?
-                            <img className='post-image' src={post.post_image}></img> :
+                            <img className='post-image' src={"https://picsum.photos/300/300"}></img> :
                             null
                         }
                         <p className='caption-text'>{post.caption}</p>
