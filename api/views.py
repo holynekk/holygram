@@ -67,3 +67,29 @@ class CreatePostView(APIView):
         else:
             return Response({'Bad Request': 'Invalid Data.'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetAllPosts(generics.ListAPIView):
+    serializer_class = PostSerializer
+    def get(self, request, format=None):
+        all_posts = Post.objects.all()
+        return_posts = []
+        if len(all_posts) > 0:
+            for i in range(len(all_posts)):
+                data = PostSerializer(all_posts[i]).data
+                return_posts.append(data)
+            return Response(return_posts, status=status.HTTP_200_OK)
+        else:
+            return Response([], status=status.HTTP_204_NO_CONTENT)
+
+class GetPostsOfFollowing(generics.ListAPIView):
+    lookup_url_kwarg = 'user'
+    def get(self, request, format=None):
+        user = request.GET.get(self.lookup_url_kwarg)
+        if user != None:
+            posts = Post.objects.filter(user_name=user)
+            if len(posts) > 0:
+                return Response([], status=status.HTTP_200_OK)
+            return Response([], status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
+        
+

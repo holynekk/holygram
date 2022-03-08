@@ -32,12 +32,10 @@ function CreatePost({user}) {
         sentData.append("caption", caption);
         sentData.append("post_image", imageFile);
 
+
         fetch("/api/create-post", {
             method: "POST",
             enctype: 'multipart/form-data',
-            // headers: {
-            //     "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
-            // },
             body: sentData
         })
             .then((response)=>response.json())

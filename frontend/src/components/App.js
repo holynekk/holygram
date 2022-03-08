@@ -8,7 +8,7 @@ import Search from './Search';
 import CreatePost from './CreatePost';
 
 function App() {
-    const [user, setUser] = useState("HolyNekK");
+    const [user, setUser] = useState("");
     return (
         <div style={{height: '100%'}} className=''>
             <BrowserRouter>
@@ -32,7 +32,7 @@ function App() {
                     </div>
                 </nav>
                 <Routes>
-                    <Route element={<HomePage />} path='/' exact />
+                    <Route element={<HomePage user={user}/>} path='/' exact />
                     <Route element={<Login setUser={setUser}/>} path='/login' />
                     <Route element={<SignUp setUser={setUser}/>} path='/sign-up' />
                     <Route element={<Profile />} path='/profile/:username' />
