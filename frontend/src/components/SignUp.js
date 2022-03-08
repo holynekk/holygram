@@ -49,6 +49,7 @@ function SignUp({setUser}) {
     return (
         <div className='container'>
             <form className='sign-up-form'>
+                <p className='form-header'>HG</p>
                 <div className="group">      
                     <input type="text" onChange={handleFirstName} required />
                     <span className="highlight"></span>
@@ -70,7 +71,7 @@ function SignUp({setUser}) {
                     <label>User Name</label>
                 </div>
                 <div className="group">      
-                    <input type="text" onChange={handlePassword} required />
+                    <input type="password" onChange={handlePassword} required />
                     <span className="highlight"></span>
                     <span className="bar"></span>
                     <label>Password</label>

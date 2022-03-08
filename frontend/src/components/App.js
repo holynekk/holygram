@@ -17,9 +17,7 @@ function App() {
                     <div className='nav-buttons'>
                         <div className='nav-tripple'>
                             <Link className='link' to='/'>Feed</Link>
-                            {/* <div className='vertical-line' /> */}
                             <Link className='link' to='/search'>Search</Link>
-                            {/* <div className='vertical-line' /> */}
                             <Link className='link' to='/create-post'>Post</Link>
                         </div>
                         {

@@ -106,11 +106,13 @@ body {
 .container { 
     font-family:'Roboto';
     width:600px;
-    height: 500px;
+    height: 600px;
     margin: 100px auto 0; 
     display:block; 
     background:#FFF;
     padding:10px 50px 50px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px #888888;
 }
 
 .sign-up-form {
@@ -123,6 +125,14 @@ body {
     position:relative; 
     margin-bottom:45px; 
 }
+
+.form-header {
+    margin: -60px auto 50px 90px;
+    color: var(--primary);
+    font-size: 100px;
+    font-family: 'Major Mono Display', monospace;
+}
+
 .group > input {
     font-size:18px;
     padding:10px 10px 10px 5px;
@@ -219,6 +229,7 @@ input:focus ~ .highlight {
 
 .create-button {
     font-family:'Roboto';
+    font-weight: 400;
     background-color: var(--secondary);
 	padding: 10px;
 	cursor: pointer;
@@ -226,14 +237,14 @@ input:focus ~ .highlight {
 
     position: relative;
     left: 100px;
-    border: none;
+    border: 2px solid var(--primary);
     border-radius: 20px;
 }
 
 .small-login {
     position: relative;
     top: 40px;
-    right: 10px;
+    right: 15px;
 }
 
 /* Signup Form ---------------------------------------------------------- */
@@ -358,17 +369,11 @@ input:focus ~ .highlight {
     margin: auto;
 }
 
-.caption-text {
-
-}
 
 /* Feed Section ---------------------------------------------------------- */
 
 /* Search Section ---------------------------------------------------------- */
 
-.search-wrapper {
-
-}
 
 /* Search Section ---------------------------------------------------------- */
 

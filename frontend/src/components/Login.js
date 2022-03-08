@@ -24,8 +24,9 @@ function Login({setUser}) {
     }
 
     return (
-        <div className='container' style={{height: '300px'}}>
+        <div className='container' style={{height: '450px'}}>
             <form className='sign-up-form'>
+                <p className='form-header'>HG</p>
                 <div className="group">      
                     <input type="text" onChange={handleUserName} required />
                     <span className="highlight"></span>
@@ -33,7 +34,7 @@ function Login({setUser}) {
                     <label>User Name</label>
                 </div>
                 <div className="group">      
-                    <input type="text" onChange={handlePassword} required />
+                    <input type="password" onChange={handlePassword} required />
                     <span className="highlight"></span>
                     <span className="bar"></span>
                     <label>Password</label>
@@ -42,10 +43,11 @@ function Login({setUser}) {
                     type="button"
                     className='create-button'
                     onClick={login}
+                    style={{marginLeft: "25px"}}
                 >
                     Log in
                 </button>
-                <small className='small-login'>Don't have an account? Let's sign up <Link to="/sign-up">here</Link></small>
+                <small style={{marginLeft: "-25px"}}className='small-login'>Don't have an account? Let's sign up <Link to="/sign-up">here</Link></small>
             </form>
         </div>
     );
