@@ -92,4 +92,22 @@ class GetPostsOfFollowing(generics.ListAPIView):
         else:
             return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
         
+class SearchUser(generics.ListAPIView):
+    lookup_url_kwarg = 'userName'
+    def get(self, request, format=None):
+        userName = request.GET.get(self.lookup_url_kwarg)
+        if userName != None:
+            users = User.objects.filter(user_name__startswith=userName)
+            if len(users) > 0:
+                return_users = []
+                for i in range(len(users)):
+                    data = UserSerializer(users[i]).data
+                    return_users.append(data)
+                return Response(return_users, status=status.HTTP_200_OK)
+            return Response([], status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+            

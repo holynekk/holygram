@@ -277,6 +277,7 @@ input:focus ~ .highlight {
 
 /* Create Post ---------------------------------------------------------- */
 
+/* Feed Section ---------------------------------------------------------- */
 
 .feed-section {
     display: flex;
@@ -341,4 +342,21 @@ input:focus ~ .highlight {
 
 .caption-text {
 
+}
+
+/* Feed Section ---------------------------------------------------------- */
+
+/* Search Section ---------------------------------------------------------- */
+
+.search-wrapper {
+
+}
+
+/* Search Section ---------------------------------------------------------- */
+
+
+.profile-element-wrapper {
+    height: 100px;
+    width: 300px;
+    background-color: red;
 }

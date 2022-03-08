@@ -1,7 +1,7 @@
 from django.urls import path
 
 from holygram.settings import MEDIA_ROOT, MEDIA_URL
-from .views import UserView, CreateUserView, GetUserView, PostView, CreatePostView, GetAllPosts, GetPostsOfFollowing
+from .views import UserView, CreateUserView, GetUserView, PostView, CreatePostView, GetAllPosts, GetPostsOfFollowing, SearchUser
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('create-post', CreatePostView.as_view()),
     path('get-all-posts', GetAllPosts.as_view()),
     path('get-posts-of-following', GetPostsOfFollowing.as_view()),
+    path('search-user', SearchUser.as_view()),
 ]
 
 if settings.DEBUG:
