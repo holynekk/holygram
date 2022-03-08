@@ -51,11 +51,14 @@ function CreatePost({user}) {
             <form className='create-post-form'>
                 <img src={imageFile ? URL.createObjectURL(imageFile) : null} className="uploaded-image"/>
                 <label className="browse-button">
-                    Upload Image <input type="file" accept="image/*" style={{display: "none"}} onChange={uploadImage}/>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg> 
+                    Upload Image<input type="file" accept="image/*" style={{display: "none"}} onChange={uploadImage}/>
                 </label>
-                <label htmlFor='heading-text'>Heading:</label>
-                <input type='text' id='heading-text' onChange={handleHeading}/>
-                <label htmlFor='caption-text'>Caption:</label>
+                <label style={{fontWeight: 900, fontSize: 'larger', margin: '10px'}} htmlFor='heading-text'>Heading</label>
+                <input type='text' id='heading-text' maxlength="100" onChange={handleHeading}/>
+                <label style={{fontWeight: 900, fontSize: 'larger', margin: '10px'}} htmlFor='caption-text'>Caption</label>
                 <textarea id='caption-text' cols="100" rows="15" placeholder="Enter the text" onChange={handleCaption}/>
                 <button
 

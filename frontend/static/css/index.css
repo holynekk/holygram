@@ -284,6 +284,8 @@ input:focus ~ .highlight {
     width: 900px;
     height: 100%;
     margin: 0 auto 0 auto;
+    font-family: 'Roboto';
+    box-shadow: 1px 1px 1px 1px #aaa;
 }
 
 .create-post-form {
@@ -295,22 +297,57 @@ input:focus ~ .highlight {
 
 .create-post-form > img {
     margin: 40px auto 10px auto;
-    background-color: #757575;
+    background-color: #aaa;
+    border-radius: 5px;
     width: 450px;
     height: 450px;
 }
 
 .browse-button {
     background-color: #bbb;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    padding: 10px;
-    margin: 10px auto 20px auto;
+    padding: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-small;
+    z-index: 2;
+
+    position: relative;
+    bottom: 50px;
+    left: 160px;
+
+    transition: border 0.2s, background-color 0.2s ease-in-out;
 }
 
-.create-post-form > textarea {
+.browse-button:hover {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    background-color: #aaa;
+}
+
+.browse-button > svg {
+    width: 15px;
+    height: 15px;
+}
+
+.create-post-form > #heading-text {
     border: 1px solid var(--primary);
-    border-radius: 10px;
+    width: 81%;
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 5px;
+    resize: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.create-post-form > #caption-text {
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 20px;
     resize: none;
     box-shadow: none;
     outline: none;
