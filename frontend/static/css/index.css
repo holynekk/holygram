@@ -98,6 +98,34 @@ body {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
+.logged-in-drop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.logged-in-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-button > svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    color: white;
+}
+
 /* Navbar ---------------------------------------------------------- */
 
 
