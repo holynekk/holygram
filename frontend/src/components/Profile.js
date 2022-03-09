@@ -3,22 +3,31 @@ import { useParams } from 'react-router-dom';
 
 function Profile({user}) {
     const [profileData, setProfileData] = useState("");
+    const [followData, setFollowData] = useState({});
     const [posts, setPosts] = useState({});
     const [following, setFollowing] = useState(false);
     const [owner, setOwner] = useState(false);
-    const [editing, setEditing] = useState(false);
     const params = useParams();
 
     useEffect(()=>{
-        updateProfile(params.username)
+        updateProfile(params.username);
+        updateFollowData();
     }, [params.username, user]);
 
+    function updateFollowData() {
+        fetch('/api/get-follow-data?userName=' + params.username)
+            .then((res)=>res.json())
+            .then((data)=>{
+                setFollowData(data);
+                updateFollowing(data.following_list);
+            }).catch((err)=>console.log(err));
+    }
 
-    function updateFollowing(profile) {
-        for(let follower of profile.followers) {
-            if (follower.user_name === user) {
+    function updateFollowing(data) {
+        for(let follower of data) {
+            if (follower === user) {
                 setFollowing(true);
-                break;
+                return;
             }
         }
         setFollowing(false);
@@ -34,23 +43,34 @@ function Profile({user}) {
                 fetch('/api/get-user-posts?userName=' + username)
                     .then((res)=>res.json())
                     .then((posts)=>{
-                        console.log(posts)
-                        console.log(data)
                         setProfileData(data);
                         setPosts(posts);
-                        updateFollowing(data);
-                        setOwner(user === data.user_name)
+                        setOwner(user === params.username);
                     })
             })
             .catch((err)=>console.log(err));
     }
 
-    function handleFollowClick() {
-
-    }
-
-    function hideEditCallback() {
-
+    function handleFollowClick(e) {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                follower: user,
+                following: params.username,
+            }),
+        };
+        if (e.target.name === 'Follow') {
+            fetch('/api/follow-user', requestOptions)
+                .then((res)=>res.json())
+                .then((data)=>console.log(data))
+                .catch((err)=>console.log(err));
+        } else if (e.target.name === 'Unfollow') {
+            fetch('/api/unfollow-user', requestOptions)
+                .then((res)=>res.json())
+                .then((data)=>console.log(data))
+                .catch((err)=>console.log(err));
+        } else;
     }
 
     if (profileData == {}) return null;
@@ -65,9 +85,8 @@ function Profile({user}) {
                     <div className='profile-name'>
                         <h3>u/{profileData.user_name}</h3>
                         {user && !owner ? (
-                            <button onClick={handleFollowClick}>{following ? "Unfollow" : "Follow"}</button>
+                            <button onClick={handleFollowClick} name={following ? "Unfollow" : "Follow"}>{following ? "Unfollow" : "Follow"}</button>
                         ) : null}
-                        {user && owner ? <button onClick={setEditing(true)}>Edit Profile</button> : null}
                     </div>
                     <div className='vertical-data'>
                         <div className='v-data'>
@@ -76,11 +95,11 @@ function Profile({user}) {
                         </div>
                         <div className='v-data'>
                             <p><strong>Followers</strong></p>
-                            <p>{profileData.followers ? profileData.followers.length : 0}</p>
+                            <p>{followData.follower_number}</p>
                         </div>
                         <div className='v-data'>
                             <p><strong>Following</strong></p>
-                            <p>{profileData.following ? profileData.following.length : 0}</p>
+                            <p>{followData.following_number}</p>
                         </div>
                         
                     </div>

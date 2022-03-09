@@ -1,10 +1,11 @@
 from cgitb import lookup
+from copyreg import constructor
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer, CreateUserSerializer, PostSerializer, CreatePostSerializer
-from .models import User, Post
+from .models import User, Post, Follow
 
 # Create your views here.
 
@@ -117,7 +118,6 @@ class GetProfile(APIView):
         if user_name != None:
             user = User.objects.filter(user_name=user_name)
             if len(user) > 0:
-                # print(UserSerializer(user[0]).data)
                 return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
             return Response({'User Not Found': 'Invalid User Name.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'Username couldn\'t found in database'}, status=status.HTTP_400_BAD_REQUEST) 
@@ -135,7 +135,51 @@ class GetUserPosts(generics.ListAPIView):
                     data = PostSerializer(posts[i]).data
                     return_posts.append(data)
                 return Response(return_posts, status=status.HTTP_200_OK)
-            return Response([], status=status.HTTP_204_NO_CONTENT)
+            return Response([], status=status.HTTP_200_OK)
         else:
             return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
 
+class FollowUser(APIView):
+    def post(self, request, format=None):
+        follower = User.objects.filter(user_name=request.data["follower"])[0]
+        following = User.objects.filter(user_name=request.data["following"])[0]
+        follow_object = Follow.objects.filter(follower=follower, following=following)
+        if len(follow_object) == 0:
+            follow_object = Follow(follower=follower, following=following)
+            follow_object.save()
+            return Response([], status=status.HTTP_200_OK)
+        else:
+            return Response([], status=status.HTTP_405_METHOD_NOT_ALLOWED)
+class UnFollowUser(APIView):
+    def post(self, request, format=None):
+        follower = User.objects.filter(user_name=request.data["follower"])[0]
+        following = User.objects.filter(user_name=request.data["following"])[0]
+        follow_object = Follow.objects.filter(follower=follower, following=following)
+        print(follow_object)
+        if len(follow_object) == 1:
+            follow_object.delete()
+            return Response([], status=status.HTTP_201_CREATED)
+        else:
+            return Response([], status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+class GetFollowData(generics.ListAPIView):
+    lookup_url_kwarg = 'userName'
+    def get(self, request, format=None):
+        username = request.GET.get(self.lookup_url_kwarg)
+        if username != None:
+            current_user = User.objects.filter(user_name=username)[0]
+            following_list = []
+            following = Follow.objects.filter(follower__user_name=current_user.user_name)
+            follower = Follow.objects.filter(following__user_name=current_user.user_name)
+            for i in range(len(follower)):
+                following_list.append(follower[i].follower.user_name)
+            return Response({
+                    'following_list': following_list, 
+                    'follower_number': len(follower), 
+                    'following_number': len(following)
+                }, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid user data..'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+        

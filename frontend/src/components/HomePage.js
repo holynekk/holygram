@@ -35,7 +35,7 @@ function HomePage({user}) {
                         <p className='caption-text'>{post.caption}</p>
                     </div>
                 </div>
-            )) : null}
+            )) : <p>There are no posts to view...</p>}
         </div>
     );
 } 
