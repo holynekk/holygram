@@ -108,6 +108,34 @@ class SearchUser(generics.ListAPIView):
         else:
             return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetProfile(APIView):
+    serializer_class = UserSerializer
+    lookup_url_kwarg = 'userName'
 
+    def get(self, request, format=None):
+        user_name = request.GET.get(self.lookup_url_kwarg)
+        if user_name != None:
+            user = User.objects.filter(user_name=user_name)
+            if len(user) > 0:
+                # print(UserSerializer(user[0]).data)
+                return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
+            return Response({'User Not Found': 'Invalid User Name.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'Bad Request': 'Username couldn\'t found in database'}, status=status.HTTP_400_BAD_REQUEST) 
 
-            
+class GetUserPosts(generics.ListAPIView):
+    serializer_class = PostSerializer
+    lookup_url_kwarg = 'userName'
+    def get(self, request, format=None):
+        user = request.GET.get(self.lookup_url_kwarg)
+        if user != None:
+            posts = Post.objects.filter(user_name=user)
+            return_posts = []
+            if len(posts) > 0:
+                for i in range(len(posts)):
+                    data = PostSerializer(posts[i]).data
+                    return_posts.append(data)
+                return Response(return_posts, status=status.HTTP_200_OK)
+            return Response([], status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'Bad Request': 'Invalid post data..'}, status=status.HTTP_400_BAD_REQUEST)
+

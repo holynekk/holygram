@@ -39,7 +39,7 @@ function App() {
                     <Route element={<HomePage user={user}/>} path='/' exact />
                     <Route element={<Login setUser={setUser}/>} path='/login' />
                     <Route element={<SignUp setUser={setUser}/>} path='/sign-up' />
-                    <Route element={<Profile />} path='/profile/:username' />
+                    <Route element={<Profile user={user} />} path='/profile/:username' />
                     <Route element={<Search />} path='/search' />
                     <Route element={<CreatePost user={user}/>} path='/create-post' />
                 </Routes>
