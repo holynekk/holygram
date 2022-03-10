@@ -116,7 +116,7 @@ function Profile({user}) {
                                 <p className='profile-post-caption-text'>{post.caption}</p>
                             </div>
                         );
-                    }): null
+                    }): <p>There are no posts to view.</p>
                 }
             </div>
         </div>

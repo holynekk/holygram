@@ -8,7 +8,7 @@ import Search from './Search';
 import CreatePost from './CreatePost';
 
 function App() {
-    const [user, setUser] = useState("HolyNekK");
+    const [user, setUser] = useState("");
     return (
         <div style={{height: '100%'}} className=''>
             <BrowserRouter>
