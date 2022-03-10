@@ -27,6 +27,10 @@ class CreateUserView(APIView):
             if queryset.exists():
                 return Response({'Bad Request': 'User with that username is already exists!'}, status=status.HTTP_400_BAD_REQUEST)
             else:
+                if len(password) < 8:
+                    return Response({'Bad password': 'Password is too short. It should be longer than 8 characters!'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                if len(password) > 20:
+                    return Response({'Bad password': 'Password is too long. It should be shorter than 20 characters!'}, status=status.HTTP_406_NOT_ACCEPTABLE)
                 user = User(first_name=first_name, last_name=last_name, user_name=user_name, password=password)
                 user.save()
                 return Response((UserSerializer(user).data), status=status.HTTP_201_CREATED)
