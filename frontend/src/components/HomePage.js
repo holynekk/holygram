@@ -25,11 +25,12 @@ function HomePage({user}) {
                     <div className='post-info-section'>
                         <Link className='profile-name-tag' to={'/profile/' + post.user_name}>u/{post.user_name}</Link>
                     </div>
+                    {console.log()}
                     <div className='post-content'>
                         <p className='heading-text'>{post.heading}</p>
                         {
                             post.post_image ?
-                            <img className='post-image' src={"https://picsum.photos/300/300"}></img> :
+                            <img className='post-image' src={"/static/images/" + post.post_image.split("/").slice(-1)}></img> :
                             null
                         }
                         <p className='caption-text'>{post.caption}</p>

@@ -112,7 +112,7 @@ function Profile({user}) {
                         return (
                             <div className='profile-post-content' key={postIndex}>
                                 <p className='profile-post-heading-text'>{post.heading}</p>
-                                <img src={"https://picsum.photos/300/300"} />
+                                <img src={"/static/images/" + post.post_image.split("/").slice(-1)} />
                                 <p className='profile-post-caption-text'>{post.caption}</p>
                             </div>
                         );

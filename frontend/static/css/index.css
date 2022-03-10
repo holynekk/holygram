@@ -629,6 +629,11 @@ input:focus ~ .highlight {
     border: 1px solid #555;
 }
 
+.profile-post-content > img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
 .profile-name {
     display: inherit;
     flex-direction: row;
