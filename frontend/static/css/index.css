@@ -295,12 +295,19 @@ input:focus ~ .highlight {
     justify-content: center;
 }
 
-.create-post-form > img {
+.uploaded-image {
     margin: 40px auto 10px auto;
-    background-color: #aaa;
+    background-color: #ccc;
     border-radius: 5px;
     width: 450px;
     height: 450px;
+    display: flex;
+    align-items: center;
+}
+
+.uploaded-image > img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .browse-button {

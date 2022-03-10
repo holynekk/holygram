@@ -63,12 +63,12 @@ function Profile({user}) {
         if (e.target.name === 'Follow') {
             fetch('/api/follow-user', requestOptions)
                 .then((res)=>res.json())
-                .then((data)=>console.log(data))
+                .then((data)=>setFollowData({...followData, follower_number: followData.follower_number+1}))
                 .catch((err)=>console.log(err));
         } else if (e.target.name === 'Unfollow') {
             fetch('/api/unfollow-user', requestOptions)
                 .then((res)=>res.json())
-                .then((data)=>console.log(data))
+                .then((data)=>setFollowData({...followData, follower_number: followData.follower_number-1}))
                 .catch((err)=>console.log(err));
         } else;
     }
