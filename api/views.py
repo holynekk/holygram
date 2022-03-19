@@ -50,7 +50,7 @@ class GetUserView(APIView):
             if len(user) > 0:
                 password = request.GET.get('password')
                 # if password == user[0].password: Verifying password
-                if utils.verify(password, user[0].password):
+                if utils.verify_password(password, user[0].password):
                     return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
                 return Response({'Unauthorized': 'Password is wrong.'}, status=status.HTTP_401_UNAUTHORIZED)
             return Response({'User Not Found': 'Invalid User Name.'}, status=status.HTTP_404_NOT_FOUND)

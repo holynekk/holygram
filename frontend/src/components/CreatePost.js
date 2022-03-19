@@ -59,7 +59,7 @@ function CreatePost({user}) {
                     Upload Image<input type="file" accept="image/*" style={{display: "none"}} onChange={uploadImage}/>
                 </label>
                 <label style={{fontWeight: 900, fontSize: 'larger', margin: '10px'}} htmlFor='heading-text'>Heading</label>
-                <input type='text' id='heading-text' maxlength="100" onChange={handleHeading}/>
+                <input type='text' id='heading-text' maxLength="100" onChange={handleHeading}/>
                 <label style={{fontWeight: 900, fontSize: 'larger', margin: '10px'}} htmlFor='caption-text'>Caption</label>
                 <textarea id='caption-text' cols="100" rows="15" placeholder="Enter the text" onChange={handleCaption}/>
                 <button
