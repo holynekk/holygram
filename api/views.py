@@ -78,7 +78,7 @@ class CreatePostView(APIView):
 class GetAllPosts(generics.ListAPIView):
     serializer_class = PostSerializer
     def get(self, request, format=None):
-        all_posts = Post.objects.all()
+        all_posts = Post.objects.all().order_by('created_at').reverse()
         return_posts = []
         if len(all_posts) > 0:
             for i in range(len(all_posts)):
