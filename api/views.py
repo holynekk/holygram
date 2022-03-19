@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer, CreateUserSerializer, PostSerializer, CreatePostSerializer
 from .models import User, Post, Follow
+from . import utils
 
 # Create your views here.
 
@@ -23,14 +24,15 @@ class CreateUserView(APIView):
             last_name = serializer.data.get('last_name')
             user_name = serializer.data.get('user_name')
             password = serializer.data.get('password')
+            # Hashing the password
+            password = utils.hash(password)
+            print(password)
             queryset = User.objects.filter(user_name=user_name)
             if queryset.exists():
                 return Response({'Bad Request': 'User with that username is already exists!'}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 if len(password) < 8:
                     return Response({'Bad password': 'Password is too short. It should be longer than 8 characters!'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-                if len(password) > 20:
-                    return Response({'Bad password': 'Password is too long. It should be shorter than 20 characters!'}, status=status.HTTP_406_NOT_ACCEPTABLE)
                 user = User(first_name=first_name, last_name=last_name, user_name=user_name, password=password)
                 user.save()
                 return Response((UserSerializer(user).data), status=status.HTTP_201_CREATED)
@@ -47,7 +49,8 @@ class GetUserView(APIView):
             user = User.objects.filter(user_name=user_name)
             if len(user) > 0:
                 password = request.GET.get('password')
-                if password == user[0].password:
+                # if password == user[0].password: Verifying password
+                if utils.verify(password, user[0].password):
                     return Response(UserSerializer(user[0]).data, status=status.HTTP_200_OK)
                 return Response({'Unauthorized': 'Password is wrong.'}, status=status.HTTP_401_UNAUTHORIZED)
             return Response({'User Not Found': 'Invalid User Name.'}, status=status.HTTP_404_NOT_FOUND)
